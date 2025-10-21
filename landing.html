@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(180deg, #0f0c29, #302b63, #24243e);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 50px;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      z-index: 10;
+    }
+
+    nav .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #9d8eff;
+    }
+
+    nav input {
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    /* Hero Section */
+    header {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 150px 80px 0;
+      background: linear-gradient(to bottom right, #181531, #2f1b4e, #5c29a5);
+      clip-path: ellipse(140% 100% at 50% 0%);
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    header p {
+      max-width: 500px;
+      color: #ccc;
+      margin: 20px 0 30px;
+    }
+
+    header button {
+      background: #8b5cf6;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    header button:hover {
+      background: #7c3aed;
+    }
+
+    /* Secciones */
+    section {
+      padding: 100px 80px;
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 1s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-dark {
+      background: #181531;
+    }
+
+    .section-light {
+      background: #2a2154;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      background: #100f2e;
+      color: #888;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      header {
+        padding: 120px 30px 0;
+      }
+
+      section {
+        padding: 60px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">Proyecto</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#contact">Contact Us</a></li>
+    </ul>
+    <input type="text" placeholder="Buscar..." />
+  </nav>
+
+  <header id="home">
+    <h1>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed esse deleniti dolorum commodi</h1>
+    <p>
+      pagina de comparaciones
+    </p>
+    <button>Get Started</button>
+  </header>
+
+  <section class="section-light">
+    <h2>Trusted by Global Brands</h2>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere perferendis iusto rerum aspernatur dolore natus commodi voluptatum esse velit, rem facilis sint harum ex. Fuga cupiditate molestias earum nesciunt fugit.
+    </p>
+  </section>
+
+  <section class="section-dark" id="contact">
+    <h2>Contact Us</h2>
+    <p>
+      jdaskdjhakjsdhakjsdhaskjdhaksjdhakjsdajd
+    </p>
+  </section>
+
+  <footer>All Rights Reserved</footer>
+
+  <script>
+    // Animar secciones al hacer scroll
+    const sections = document.querySelectorAll("section");
+    const revealOnScroll = () => {
+      sections.forEach((sec) => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+  </script>
+</body>
+</html>

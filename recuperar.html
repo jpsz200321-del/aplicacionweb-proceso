@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar Contraseña</title>
+  <style>
+    /* === ESTILOS BASE === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #00bfa6, #007b8a);
+    }
+
+    .container {
+      background: #fff;
+      padding: 40px 50px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      transition: all 0.3s ease;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    p {
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .input-box {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #00bfa6;
+      box-shadow: 0 0 6px rgba(0, 191, 166, 0.2);
+    }
+
+    button {
+      background: #00bfa6;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #009e8c;
+    }
+
+    #lblMensaje {
+      margin-top: 20px;
+      font-size: 15px;
+      display: block;
+      min-height: 20px;
+      transition: color 0.3s ease, opacity 0.5s ease;
+      opacity: 0;
+    }
+
+    #lblMensaje.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Recuperar Contraseña</h2>
+    <p>Ingresa tu correo electrónico y te enviaremos un enlace de recuperación.</p>
+
+    <div class="input-box">
+      <input type="email" id="txtCorreo" placeholder="tuemail@ejemplo.com" />
+    </div>
+
+    <button id="btnEnviar">Enviar</button>
+
+    <span id="lblMensaje"></span>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // === SCRIPT PRINCIPAL ===
+
+    const btnEnviar = document.getElementById("btnEnviar");
+    const txtCorreo = document.getElementById("txtCorreo");
+    const lblMensaje = document.getElementById("lblMensaje");
+
+    btnEnviar.addEventListener("click", () => {
+      const correo = txtCorreo.value.trim();
+
+      // Validar campo vacío
+      if (correo === "") {
+        alert("⚠️ Por favor ingresa tu correo electrónico.");
+        lblMensaje.textContent = "Por favor ingresa tu correo electrónico.";
+        lblMensaje.style.color = "red";
+        lblMensaje.classList.add("show");
+        return;
+      }
+
+      // Simulación de envío
+      alert(`📨 Se ha enviado un enlace de recuperación a ${correo}.`);
+      lblMensaje.textContent = `Se ha enviado un enlace de recuperación a ${correo}.`;
+      lblMensaje.style.color = "green";
+      lblMensaje.classList.add("show");
+
+      // Limpiar campo
+      txtCorreo.value = "";
+    });
+  </script>
+</body>
+</html>

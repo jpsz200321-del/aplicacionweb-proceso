@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login / Register</title>
+  <style>
+/* === RESET Y BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eaeaea;
+  padding: 30px;
+}
+
+/* === CONTENEDOR PRINCIPAL === */
+.container {
+  width: 900px;
+  max-width: 95%;
+  height: 550px;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+}
+
+/* === SECCIÓN DE IMAGEN === */
+.image-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Capas para transiciones suaves */
+.image-container .bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.image-container .bg.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.image-container .bg.fade-out {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+/* === SECCIÓN DE FORMULARIO === */
+.form-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  padding: 20px 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* === FORM BOX === */
+.form-box {
+  width: 80%;
+  max-width: 380px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+}
+
+/* cuando un formulario se oculta */
+.form-box.hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
+  pointer-events: none;
+}
+
+/* === TITULOS Y TEXTOS === */
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+p {
+  color: #666;
+  margin-bottom: 18px;
+}
+
+/* === INPUTS === */
+.input-box {
+  margin-bottom: 14px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.input-box input:focus {
+  border-color: #00bfa6;
+  box-shadow: 0 2px 8px rgba(0, 191, 166, 0.1);
+}
+
+/* === BOTONES === */
+.btn {
+  width: 100%;
+  padding: 12px;
+  background: #00bfa6;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background: #009e8c;
+}
+
+/* === LINKS === */
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.forgot:hover {
+  color: #00bfa6;
+}
+
+.switch-text {
+  margin-top: 14px;
+}
+
+.switch-text a {
+  color: #00bfa6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
+}
+
+.switch-text a:hover {
+  color: #009e8c;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .image-container,
+  .form-container {
+    width: 100%;
+  }
+
+  .image-container {
+    height: 220px;
+  }
+
+  .form-box {
+    position: relative;
+    transform: scale(1);
+  }
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-container" id="imageContainer">
+      <div class="bg active" id="bg1"></div>
+      <div class="bg" id="bg2"></div>
+    </div>
+
+    <div class="form-container">
+      <!-- LOGIN -->
+      <div class="form-box login-box">
+        <h2>Welcome</h2>
+        <p>Log in to your account to continue</p>
+        <form id="loginForm">
+          <div class="input-box">
+            <input type="email" placeholder="awesome@user.com" required />
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="Password" required />
+          </div>
+          <a href="recuperar.html" class="forgot">Forgot your password?</a>
+          <button type="submit" class="btn">Log In</button>
+          <p class="switch-text">
+            Don't have an account?
+            <a href="#" id="showRegister">Sign up!</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="form-box register-box hidden">
+        <h2>Create Account</h2>
+        <p>Sign up to get started</p>
+        <form id="registerForm">
+          <div class="input-box">
+            <input type="text" placeholder="Full name" required />
+          </div>
+          <div class="input-box">
+            <input type="email" placeholder="Email address" required />
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="Password" required />
+          </div>
+          <button type="submit" class="btn">Register</button>
+          <p class="switch-text">
+            Already have an account?
+            <a href="#" id="showLogin">Log in!</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // --- Referencias ---
+    const loginBox = document.querySelector(".login-box");
+    const registerBox = document.querySelector(".register-box");
+    const showRegister = document.getElementById("showRegister");
+    const showLogin = document.getElementById("showLogin");
+    const bg1 = document.getElementById("bg1");
+    const bg2 = document.getElementById("bg2");
+
+    // --- Imágenes ---
+    const loginImage =
+      "https://i.pinimg.com/736x/22/7e/96/227e96fb137c9d87b986fa07bf0127dc.jpg";
+    const registerImage =
+      "https://i.pinimg.com/1200x/5e/de/3e/5ede3e217202bf8053d6dfe342b63713.jpg";
+
+    // Asignar imagen inicial
+    bg1.style.backgroundImage = `url(${loginImage})`;
+
+    // Función para cambiar imagen con efecto crossfade
+    function changeBackground(newImage) {
+      const active = bg1.classList.contains("active") ? bg1 : bg2;
+      const next = active === bg1 ? bg2 : bg1;
+
+      next.style.backgroundImage = `url(${newImage})`;
+
+      // Transición
+      next.classList.add("active");
+      active.classList.remove("active");
+      active.classList.add("fade-out");
+
+      setTimeout(() => {
+        active.classList.remove("fade-out");
+      }, 1500);
+    }
+
+    // Mostrar registro
+    showRegister.addEventListener("click", (e) => {
+      e.preventDefault();
+      loginBox.classList.add("hidden");
+      registerBox.classList.remove("hidden");
+      changeBackground(registerImage);
+    });
+
+    // Mostrar login
+    showLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      registerBox.classList.add("hidden");
+      loginBox.classList.remove("hidden");
+      changeBackground(loginImage);
+    });
+
+    // Redirigir al hacer login
+    const loginForm = document.getElementById("loginForm");
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      window.location.href = "landing.html";
+    });
+  </script>
+</body>
+</html>
